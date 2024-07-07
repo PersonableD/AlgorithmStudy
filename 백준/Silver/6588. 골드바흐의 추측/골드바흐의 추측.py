@@ -4,12 +4,9 @@ input = sys.stdin.readline
 def sieve(limit):
     is_prime = [True] * (limit + 1)
     is_prime[0] = is_prime[1] = False
-    p = 2
-    while p * p <= limit:
+    for p in range(2, int(limit ** 0.5) + 1):
         if is_prime[p]:
-            for i in range(p * p, limit + 1, p):
-                is_prime[i] = False
-        p += 1
+            is_prime[p * p : limit + 1 : p] = [False] * len(range(p * p, limit + 1, p))
     primes = [i for i in range(limit + 1) if is_prime[i]]
     return is_prime, primes
 
