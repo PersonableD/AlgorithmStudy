@@ -1,13 +1,11 @@
 N=int(input())
-words=[]
+
+words=set()
 
 for i in range(N):
-    num=input()
-    words.append(num)
+    words.add(input())
 
-unique_words = list(set(words))
+new_sortedWords=sorted(words,key=lambda x: (len(x),x))
 
-unique_words.sort(key=lambda x: (len(x),x))
-
-for word in unique_words:
+for word in new_sortedWords:
     print(word)
