@@ -1,33 +1,28 @@
 import sys
-sys.setrecursionlimit(10**8)
+sys.setrecursionlimit(10**6)
+input=sys.stdin.readline
 N=int(input())
-tree={}
-parent={}
+graph={}
 for i in range(N):
-    root,point_one,point_two=input().split()
-    tree[root]=(point_one,point_two,root)
-    if point_one !='.':
-        parent[point_one]=root
-    if point_two !='.':
-        parent[point_two]=root
+    a,b,c=input().split()
+    graph[a]=(b,c)
 def preorder(start):
-    if start!='.':
+    if start!=".":
         print(start,end="")
-        preorder(tree[start][0])
-        preorder(tree[start][1])
+        preorder(graph[start][0])
+        preorder(graph[start][1])
 def inorder(start):
-    if start!='.':
-        inorder(tree[start][0])
+    if start!=".":
+        inorder(graph[start][0])
         print(start,end="")
-        inorder(tree[start][1])
+        inorder(graph[start][1])
 def postorder(start):
-    if start!='.':
-        postorder(tree[start][0])
-        postorder(tree[start][1])
+    if start!=".":
+        postorder(graph[start][0])
+        postorder(graph[start][1])
         print(start,end="")
-preorder('A')
+preorder("A")
 print()
-inorder('A')
+inorder("A")
 print()
-postorder('A')
-print()
+postorder("A")
