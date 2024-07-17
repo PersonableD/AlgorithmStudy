@@ -1,11 +1,12 @@
 import sys
-sys.setrecursionlimit(10**8)
+sys.setrecursionlimit(10**6)
 graph=[]
+input=sys.stdin.readline
 try:
     while True:
         n=int(input())
         graph.append(n)
-except EOFError:
+except:
     pass
 def binaryTree(s,e):
     if s==e:
