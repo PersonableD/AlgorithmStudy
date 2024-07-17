@@ -1,6 +1,7 @@
 from collections import deque
 import sys
 input=sys.stdin.readline
+sys.setrecursionlimit(10**4)
 N,M,V=map(int,input().strip().split())
 graph=[[] for _ in range(N+1)]
 for _ in range(M):
@@ -11,17 +12,13 @@ for i in range(1, N+1):
     graph[i].sort()
 visited_DFS=[False]*(N+1)
 visited_BFS=visited_DFS.copy()
+result_DFS=[]
 def DFS_stack(start):
-    stack=[start]
-    result_DFS=[]
-    while stack:
-        current= stack.pop()
-        if not visited_DFS[current]:
-            visited_DFS[current]=True
-            result_DFS.append(current)
-        for i in sorted(graph[current],reverse=True):
-             if not visited_DFS[i]:
-                stack.append(i)
+    visited_DFS[start]=True
+    result_DFS.append(start)
+    for i in graph[start]:
+        if not visited_DFS[i]:
+            DFS_stack(i)
     return result_DFS
 def BFS(start):
     queue=deque([start])
