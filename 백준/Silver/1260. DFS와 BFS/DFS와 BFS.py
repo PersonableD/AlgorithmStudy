@@ -1,32 +1,39 @@
 from collections import deque
-N,M,V=map(int,input().split())
-graph=[[]for _ in range(N+1)]
+import sys
+input=sys.stdin.readline
+N,M,V=map(int,input().strip().split())
+graph=[[] for _ in range(N+1)]
 for _ in range(M):
-    a,b = map(int,input().split())
+    a,b=map(int,input().split())
     graph[a].append(b)
     graph[b].append(a)
+for i in range(1, N+1):
+    graph[i].sort()
 visited_DFS=[False]*(N+1)
-result_DFS=[]
-def DFS(node,visited_DFS,result_DFS):
-    visited_DFS[node]=True
-    result_DFS.append(node)
-    for neighbor in sorted(graph[node]):
-        if not visited_DFS[neighbor]:
-            DFS(neighbor,visited_DFS,result_DFS)
-queue=deque()
-visited_BFS=set()
-result_BFS=[]
-def BFS(node,visited_BFS,result_BFS):
-    queue.append(node)
-    visited_BFS.add(node)
+visited_BFS=visited_DFS.copy()
+def DFS_stack(start):
+    stack=[start]
+    result_DFS=[]
+    while stack:
+        current= stack.pop()
+        if not visited_DFS[current]:
+            visited_DFS[current]=True
+            result_DFS.append(current)
+        for i in sorted(graph[current],reverse=True):
+             if not visited_DFS[i]:
+                stack.append(i)
+    return result_DFS
+def BFS(start):
+    queue=deque([start])
+    visited_BFS[start]=True
+    result_BFS=[]
     while queue:
-        vertex=queue.popleft()
+        vertex = queue.popleft()
         result_BFS.append(vertex)
-        for neighbor in sorted(graph[vertex]):
-            if neighbor not in visited_BFS:
-                visited_BFS.add(neighbor)
-                queue.append(neighbor)
-DFS(V,visited_DFS,result_DFS)
-BFS(V,visited_BFS,result_BFS)
-print(*result_DFS)
-print(*result_BFS)
+        for i in graph[vertex]:
+            if not visited_BFS[i]:
+                queue.append(i)
+                visited_BFS[i]=True
+    return result_BFS
+print(*DFS_stack(V))
+print(*BFS(V))
