@@ -1,13 +1,9 @@
 import sys
-sys.setrecursionlimit(10**4)
 input=sys.stdin.readline
 N=int(input())
-sums={}
 def f(n):
-    if n in sums:
-        return sums[n]
-    if n<=1:
-        return n
-    sums[n]= f(n-1)+f(n-2)
+    sums={0:0,1:1}
+    for i in range(2,n+1):
+        sums[i]=sums[i-1]+sums[i-2]
     return sums[n]
 print(f(N))
