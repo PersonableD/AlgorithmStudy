@@ -1,14 +1,11 @@
 import sys
 input=sys.stdin.readline
 N=int(input())
-sequence=list(map(int,input().split()))
-length=[1]*(len(sequence))
-def LIS(s):
-    if s==len(sequence):
-        return
-    for i in range(s):
-        if sequence[i]<sequence[s]:
-            length[s]=max(length[i]+1,length[s])
-    LIS(s+1)
-LIS(1)
+sequence=list(map(int,input().strip().split()))
+length=[1]*(N)
+for i in range(N):
+    for j in range(i):
+        if sequence[j]<sequence[i]:
+            if length[j]+1>length[i]:
+                length[i]=length[j]+1
 print(max(length))
