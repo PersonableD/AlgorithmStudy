@@ -1,17 +1,9 @@
 import sys
-input=sys.stdin.readline
-N,K=map(int,input().split())
-w=[0]
-v=[0]
-dp=[[0]*(K+1) for _ in range(N+1)]
+input = sys.stdin.readline
+N, K = map(int, input().split())
+dp = [0] * (K+1)
 for _ in range(N):
-    a,b=map(int,input().split())
-    w.append(a)
-    v.append(b)
-for i in range(1,N+1):
-    for j in range(1,K+1):
-        if w[i]<=j:
-            dp[i][j]=max(dp[i-1][j],dp[i-1][j-w[i]]+v[i])
-        else:
-            dp[i][j]=dp[i-1][j]
-print(dp[N][K])
+    w, v = map(int, input().split())
+    for j in range(K, w-1, -1):
+        dp[j] = max(dp[j], dp[j-w] + v)
+print(dp[K])
