@@ -1,3 +1,5 @@
+import sys
+input=sys.stdin.readline
 word1=[0]+list(input().strip())
 word2=[0]+list(input().strip())
 dp=[[0]*(len(word1)) for _ in range(len(word2))]
