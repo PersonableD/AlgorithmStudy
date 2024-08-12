@@ -26,7 +26,7 @@ def search_safezone(num):
     return count
 safezone_count=[]
 safezone_count.append(search_safezone(0))
-for i in range(arr_min,arr_max+1):
+for i in range(arr_min,arr_max):
     num=search_safezone(i)
     safezone_count.append(num)
 print(max(safezone_count))
