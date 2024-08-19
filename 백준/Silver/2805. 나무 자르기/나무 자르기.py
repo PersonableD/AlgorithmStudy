@@ -1,18 +1,20 @@
 import sys
-input = sys.stdin.readline
-def max_cutHeight(trees, M):
-    if M == 0:
-        return max(trees)
-    tree_heights = sorted(trees, reverse=True)
-    total = sum(tree_heights)
-    if total == M:
-        return 0
-    cumulative_sum = 0
-    for i in range(len(tree_heights) - 1):
-        cumulative_sum += (tree_heights[i] - tree_heights[i+1]) * (i + 1)
-        if cumulative_sum >= M:
-            return tree_heights[i+1] + (cumulative_sum - M) // (i + 1)
-    return (total - M) // len(trees)
-N, M = map(int, input().split())
-trees = list(map(int, input().split()))
-print(max_cutHeight(trees, M))
+input=sys.stdin.readline
+N,M = map(int,input().split())
+trees=list(map(int,input().split()))
+trees_max =  max(trees)
+def max_cutHeight(tree_min, tree_max):
+    result=0
+    while tree_min<= tree_max :
+        mid = (tree_min+tree_max)//2
+        total=0
+        for tree in trees:
+            if tree>mid:
+                total+=tree-mid
+        if total >= M:
+            result=mid
+            tree_min=mid+1
+        else:
+            tree_max = mid-1
+    return result
+print(max_cutHeight(0,trees_max))
