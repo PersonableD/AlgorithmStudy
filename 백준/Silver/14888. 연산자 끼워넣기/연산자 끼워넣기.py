@@ -1,4 +1,6 @@
 from itertools import permutations
+import sys
+input=sys.stdin.readline
 N=int(input())
 nums=list(map(int,input().split()))
 oper_num=list(map(int,input().split()))
