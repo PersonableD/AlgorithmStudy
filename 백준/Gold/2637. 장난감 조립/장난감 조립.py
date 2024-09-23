@@ -4,14 +4,15 @@ input = sys.stdin.readline
 
 N = int(input())
 M = int(input())
-parts = [[] for _ in range(N+1)]
-basic_parts = set(range(1, N+1))
+parts = {}
+parts_m = set()
 
 for _ in range(M):
     X, Y, K = map(int, input().split())
-    parts[X].append((Y, K))
-    if X in basic_parts:
-        basic_parts.remove(X)
+    parts_m.add(X)
+    if X not in parts:
+        parts[X] = {}
+    parts[X][Y] = K
 
 memo = {}
 
@@ -19,11 +20,11 @@ def assemble(num):
     if num in memo:
         return memo[num]
     
-    if num in basic_parts:
+    if num not in parts_m:
         return {num: 1}
     
     result = {}
-    for part, count in parts[num]:
+    for part, count in parts[num].items():
         sub_result = assemble(part)
         for sub_part, sub_count in sub_result.items():
             result[sub_part] = result.get(sub_part, 0) + sub_count * count
