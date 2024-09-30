@@ -1,4 +1,6 @@
+import sys
 N=int(input())
+input= sys.stdin.readline
 dp=[float("inf")]*(N+1)
 for i in range(1,N+1):
     if i == 1 :
