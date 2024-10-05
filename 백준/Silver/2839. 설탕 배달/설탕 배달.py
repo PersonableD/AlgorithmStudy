@@ -3,7 +3,7 @@ input = sys.stdin.readline
 N=int(input())
 cnt=0
 a = N%5
-cnt += N//5
+cnt = N//5
 while a%3!=0:
     if cnt==0:
         cnt=-1
