@@ -1,6 +1,4 @@
-N=int(input())
+N=input()
 arr=input()
-temp=0
-for i in range(N):
-    temp+=int(arr[i])
-print(temp)
+total = sum(map(int, arr))
+print(total)
