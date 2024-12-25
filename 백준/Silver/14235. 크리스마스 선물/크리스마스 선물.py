@@ -6,10 +6,10 @@ gifts=[]
 for _ in range(n):
     nums=list(map(int,input().split()))
     if nums[0]==0:
-        if not gifts:
-            print(-1)
-        else:
+        if gifts:
             print(-heapq.heappop(gifts))
+        else:
+            print(-1)
     else:
-        for i in range(1,nums[0]+1):
-            heapq.heappush(gifts,-nums[i])
+        for gift in nums[1:]:
+            heapq.heappush(gifts,-gift)
