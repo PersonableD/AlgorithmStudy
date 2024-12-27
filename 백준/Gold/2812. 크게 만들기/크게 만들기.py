@@ -1,16 +1,12 @@
 import sys
-input = sys.stdin.readline
-N,K= map(int,input().split())
-number = list(input())
+N,K=map(int,input().split())
+num_str=input()
 stack=[]
-remove_count=0
-for i in range(N):
-    while remove_count<K and stack and stack[-1]<number[i]:
+to_remove=K
+for num in num_str:
+    while to_remove>0 and stack and stack[-1]<num:
         stack.pop()
-        remove_count+=1
-    stack.append(number[i])
-while remove_count<K:
-    stack.pop()
-    remove_count+=1
-result = "".join(stack)
-print(result)
+        to_remove-=1
+    stack.append(num)
+stack=stack[:N-K]
+print(*stack,sep="")
